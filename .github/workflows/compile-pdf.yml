@@ -6,6 +6,10 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -25,3 +29,25 @@ jobs:
         with:
           name: ss1-math-textbook-pdf
           path: ss1_math_textbook/main.pdf
+
+      - name: Save PDF and cleanup
+        run: |
+          mkdir -p saves
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          cp ss1_math_textbook/main.pdf saves/textbook_$TIMESTAMP.pdf
+
+          # Keep only the last 3 recent compilations
+          cd saves
+          ls -t textbook_*.pdf | tail -n +4 | xargs -r rm
+          cd ..
+
+          # Commit and push
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add saves/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Save compiled PDF $TIMESTAMP and cleanup old versions"
+            git push
+          fi
