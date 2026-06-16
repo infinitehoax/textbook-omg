@@ -1,0 +1,41 @@
+\documentclass[11pt, a4paper, twoside, openright]{book}
+
+\input{setup/preamble}
+
+\begin{document}
+
+% --- Front Matter ---
+\frontmatter
+\input{frontmatter/titlepage}
+\cleardoublepage
+\tableofcontents
+\input{frontmatter/preface}
+\input{frontmatter/syllabus}
+
+% --- Main Matter ---
+\mainmatter
+
+\part{First Term}
+\include{chapters/term1/01_number_bases/chapter_main}
+\include{chapters/term1/02_modular_arithmetic/chapter_main}
+\include{chapters/term1/03_indices_and_logarithms/chapter_main}
+\include{chapters/term1/04_set_theory/chapter_main}
+
+\part{Second Term}
+\include{chapters/term2/05_algebraic_processes/chapter_main}
+\include{chapters/term2/06_simple_equations_and_variations/chapter_main}
+\include{chapters/term2/07_logical_reasoning/chapter_main}
+\include{chapters/term2/08_geometry_lines_and_angles/chapter_main}
+
+\part{Third Term}
+\include{chapters/term3/09_trigonometry/chapter_main}
+\include{chapters/term3/10_mensuration_solid_shapes/chapter_main}
+\include{chapters/term3/11_statistics_and_probability/chapter_main}
+
+% --- Back Matter ---
+\backmatter
+\include{backmatter/answers}
+\include{backmatter/glossary}
+\printindex
+
+\end{document}
